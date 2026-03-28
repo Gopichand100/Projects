@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMS Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>LLMS Portal</h1>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><button class="login-btn" onclick="openModal()">Login</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h2>Welcome to LLMS Portal</h2>
+            <p>Access your courses, track progress, and learn at your pace.</p>
+        </section>
+
+        <section id="dashboard" class="stats">
+            <div class="stat-card">
+                <h3>12</h3>
+                <p>Total Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3>8</h3>
+                <p>Enrolled</p>
+            </div>
+            <div class="stat-card">
+                <h3>65%</h3>
+                <p>Completion Rate</p>
+            </div>
+            <div class="stat-card">
+                <h3>4.5</h3>
+                <p>Average Rating</p>
+            </div>
+        </section>
+
+        <section id="courses">
+            <h2>Popular Courses</h2>
+            <div class="courses">
+                <div class="course-card">
+                    <div class="course-img">Web Development</div>
+                    <div class="course-info">
+                        <h3>HTML/CSS/JS Fundamentals</h3>
+                        <p>Learn responsive design and interactivity.</p>
+                        <div class="progress"><div class="progress-bar" style="width: 70%;"></div></div>
+                        <button class="enroll-btn" onclick="enroll('Web Dev')">Enroll Now</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">Data Science</div>
+                    <div class="course-info">
+                        <h3>Python for Data Analysis</h3>
+                        <p>Master Pandas and visualization tools.</p>
+                        <div class="progress"><div class="progress-bar" style="width: 40%;"></div></div>
+                        <button class="enroll-btn" onclick="enroll('Data Science')">Enroll Now</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">Graphic Design</div>
+                    <div class="course-info">
+                        <h3>Adobe Express Mastery</h3>
+                        <p>Brand design and portfolio building.</p>
+                        <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
+                        <button class="enroll-btn" onclick="enroll('Design')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LLMS Portal. Built with HTML, CSS & JS.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
