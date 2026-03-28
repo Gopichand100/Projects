@@ -1,0 +1,304 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #FF9900, #FFAA00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+}
+
+.menu a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.menu a:hover {
+    opacity: 0.8;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%),
+                url('https://images.unsplash.com/photo-1489599169690-736f298e8c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    opacity: 0.9;
+}
+
+.cta-btn {
+    background: #FF9900;
+    color: #0F0F0F;
+    border: none;
+    padding: 18px 36px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-btn:hover {
+    background: #FFB300;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 153, 0, 0.4);
+}
+
+/* Content Sections */
+.content-section {
+    padding: 100px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.content-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #333;
+}
+
+.content-section > p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 48px;
+    max-width: 800px;
+}
+
+/* Carousel */
+.carousel-container {
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.carousel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 3px;
+}
+
+.movie-poster {
+    width: 220px;
+    height: 330px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.movie-poster:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.poster-overlay {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 20px 12px 12px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Channels Grid */
+.channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
+}
+
+.channel-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    background: #1A1A1A;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.channel-card:hover {
+    background: #232323;
+    transform: translateY(-4px);
+}
+
+.channel-icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.channel-icon.apple-tv { background: #000; color: #fff; }
+.channel-icon.crunchyroll { background: linear-gradient(135deg, #FECA57, #FF9F43); color: #000; }
+.channel-icon.lionsgate { background: linear-gradient(135deg, #E74C3C, #C0392B); color: #fff; }
+.channel-icon.discovery { background: linear-gradient(135deg, #F39C12, #E67E22); color: #fff; }
+.channel-icon.anime { background: linear-gradient(135deg, #9B59B6, #8E44AD); color: #fff; }
+.channel-icon.manorama { background: linear-gradient(135deg, #2ECC71, #27AE60); color: #fff; }
+
+.channel-card span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Footer */
+.footer {
+    background: #0A0A0A;
+    padding: 48px 24px 24px;
+    text-align: center;
+}
+
+.footer-content p {
+    margin-bottom: 16px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: #CCCCCC;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+.footer-links span {
+    color: #666;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        padding: 12px 16px;
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+    
+    .menu {
+        display: none;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .movie-poster {
+        width: 150px;
+        height: 225px;
+    }
+    
+    .channels-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 16px;
+    }
+    
+    .content-section {
+        padding: 80px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-poster {
+        width: 130px;
+        height: 195px;
+    }
+}
