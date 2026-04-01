@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Hub LMS</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #2ecc71;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .nav-links button:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* Container & Views */
+        .container {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* Forms (Sign In / Sign Up) */
+        .card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 450px;
+            margin: 2rem auto;
+        }
+
+        h3 { color: var(--primary); margin-top: 0; }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.6rem 0 1.2rem 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .btn-main {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* Dashboard & Stats */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--secondary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        /* Table Design */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { background: #f8f9fa; color: #666; font-weight: 600; }
+
+        .enroll-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2 style="margin:0">🎓 College Hub</h2>
+    <div class="nav-links" id="navLinks">
+        <button onclick="showView('loginView')">Sign In</button>
+        <button onclick="showView('signupView')">Sign Up</button>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- View 1: Sign In -->
+    <div id="loginView" class="view active">
+        <div class="card">
+            <h3>Welcome Back</h3>
+            <label>Login As</label>
+            <select id="loginRole">
+                <option value="Student">Student</option>
+                <option value="Admin">Administrator</option>
+            </select>
+            <input type="email" placeholder="Email Address">
+            <input type="password" placeholder="Password">
+            <button class="btn-main" onclick="handleLogin()">Login to Portal</button>
+        </div>
+    </div>
+
+    <!-- View 2: Sign Up -->
+    <div id="signupView" class="view">
+        <div class="card">
+            <h3>Create Student/Admin Account</h3>
+            <input type="text" placeholder="Full Name">
+            <input type="email" placeholder="Institutional Email">
+            <select>
+                <option value="Student">Student Role</option>
+                <option value="Admin">Admin Role</option>
+            </select>
+            <input type="password" placeholder="Create Password">
+            <button class="btn-main" onclick="showView('loginView')">Register Now</button>
+        </div>
+    </div>
+
+    <!-- View 3: Dashboard -->
+    <div id="dashboardView" class="view">
+        <h2 id="welcomeText">Dashboard</h2>
+        
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <h4 style="margin:0; color:#888">Total Courses</h4>
+                <h2 style="margin:10px 0 0 0">24</h2>
+            </div>
+            <div class="stat-card">
+                <h4 style="margin:0; color:#888">Your Enrollments</h4>
+                <h2 style="margin:10px 0 0 0" id="enrollCount">0</h2>
+            </div>
+        </div>
+
+        <h3>Available Courses & Enrollments</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Instructor</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="courseBody">
+                    <!-- Dynamic Rows -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Sample Data
+    const courses = [
+        { name: "Introduction to AI", code: "CS501", teacher: "Dr. Aris", status: "Open" },
+        { name: "Advanced Web Dev", code: "WD202", teacher: "Prof. Sarah", status: "Open" },
+        { name: "Data Structures", code: "DS101", teacher: "Mr. Kevin", status: "Open" }
+    ];
+
+    let userEnrollments = 0;
+
+    // Navigation Logic
+    function showView(viewId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
+    }
+
+    // Login Logic
+    function handleLogin() {
+        const role = document.getElementById('loginRole').value;
+        document.getElementById('welcomeText').innerText = `Welcome, ${role} Dashboard`;
+        
+        // Update Nav for Logged In State
+        document.getElementById('navLinks').innerHTML = `
+            <button onclick="showView('dashboardView')">Dashboard</button>
+            <button onclick="location.reload()">Logout</button>
+        `;
+        
+        renderCourses();
+        showView('dashboardView');
+    }
+
+    // Render Table
+    function renderCourses() {
+        const tbody = document.getElementById('courseBody');
+        tbody.innerHTML = courses.map(c => `
+            <tr>
+                <td><b>${c.name}</b></td>
+                <td>${c.code}</td>
+                <td>${c.teacher}</td>
+                <td><span style="color:green">●</span> ${c.status}</td>
+                <td>
+                    <button class="enroll-btn" onclick="updateEnrollment('${c.name}')">
+                        Join Course
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Enrollment Updates
+    function updateEnrollment(courseName) {
+        userEnrollments++;
+        document.getElementById('enrollCount').innerText = userEnrollments;
+        alert(`Success! You have joined ${courseName}. Enrollment records updated.`);
+    }
+</script>
+
+</body>
+</html>
